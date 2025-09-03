@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+  <head> <title> lang="en"></title></head>
+</html>
+</html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio | BCA 3rd Year Student</title>
+  <meta name="description" content="Modern portfolio for a BCA 3rd year student with animated tech-logo and interactive sections." />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* CSS */
+    :root{
+      --bg1:#0b1020;
+      --bg2:#071429;
+      --glass: rgba(255,255,255,0.04);
+      --muted:#9aa6bf;
+      --text:#eaf2ff;
+      --accent1:#7c3aed; /* purple */
+      --accent2:#06b6d4; /* cyan */
+      --gold:#f59e0b;
+      --card-radius:16px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{
+      font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.5;
+    }
+
+    .container{width:min(1120px,92%);margin:0 auto}
+    header{position:sticky;top:12px;z-index:60;padding:1rem 0}
+    .nav{display:flex;align-items:center;justify-content:space-between;padding:.6rem 1rem;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 6px 30px rgba(2,6,23,.6);backdrop-filter:blur(6px)}
+
+    /* Logo */
+    .brand{display:flex;align-items:center;gap:.9rem}
+    .logo-wrap{width:56px;height:56px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--accent1),var(--accent2));box-shadow:0 8px 30px rgba(6,182,212,.08);transform-origin:center;animation:logoFloat 6s ease-in-out infinite}
+    .logo-wrap svg{width:38px;height:38px;filter:drop-shadow(0 6px 14px rgba(124,58,237,.25))}
+    .brand h4{margin:0;font-weight:700}
+    nav a{margin-left:1rem;color:var(--muted);font-weight:600}
+    nav a:hover{color:var(--accent2)}
+
+    /* Hero */
+    .hero{display:grid;grid-template-columns:1fr 420px;gap:2rem;align-items:center;padding:4.5rem 0}
+    .hero-left h1{font-size:2.4rem;line-height:1.05;background:linear-gradient(90deg,var(--accent2),var(--accent1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.6rem}
+    .hero-left p{color:var(--muted);margin-bottom:1rem}
+    .cta{display:flex;gap:.8rem;flex-wrap:wrap}
+    .btn{padding:.75rem 1.1rem;border-radius:12px;background:linear-gradient(90deg,var(--accent1),var(--accent2));color:#061024;font-weight:700;border:0;cursor:pointer;box-shadow:0 12px 30px rgba(7,12,36,.6)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+
+    .hero-right{display:flex;flex-direction:column;align-items:center;text-align:center}
+    .profile-card{width:380px;padding:1rem;border-radius:16px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 40px rgba(2,6,23,.6);backdrop-filter:blur(8px)}
+    .avatar{width:140px;height:140px;border-radius:50%;border:4px solid rgba(255,255,255,0.06);overflow:hidden;margin:0 auto 1rem;box-shadow:0 12px 40px rgba(6,182,212,.06);}
+    .avatar img{width:100%;height:100%;object-fit:cover}
+
+    /* Sections */
+    section{padding:3rem 0}
+    h2{font-size:1.5rem;margin-bottom:1rem;color:var(--gold)}
+    .grid{display:grid;gap:1rem}
+
+    /* Skills with animated bars */
+    .skills-grid{grid-template-columns:1fr 1fr}
+    .skill{background:var(--glass);padding:1rem;border-radius:12px}
+    .skill .label{display:flex;justify-content:space-between;margin-bottom:.6rem}
+    .bar{height:10px;background:rgba(255,255,255,0.04);border-radius:6px;overflow:hidden}
+    .fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--accent2),var(--accent1));width:0;transition:width 1.4s cubic-bezier(.2,.9,.3,1)}
+
+    /* Projects */
+    .projects-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .project-card{border-radius:12px;padding:1rem;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));box-shadow:0 8px 30px rgba(2,6,23,.5);transition:transform .35s ease, box-shadow .35s ease}
+    .project-card:hover{transform:translateY(-8px);box-shadow:0 18px 60px rgba(2,6,23,.7)}
+    .project-media{height:140px;border-radius:10px;overflow:hidden;margin-bottom:.75rem}
+
+    /* Achievements */
+    .achievements{display:flex;flex-direction:column;gap:.8rem}
+    .ach-card{padding:.9rem;border-radius:10px;background:linear-gradient(90deg, rgba(124,58,237,0.06), rgba(6,182,212,0.03));}
+
+    /* Contact */
+    .contact-card{display:grid;grid-template-columns:1fr;gap:.8rem;padding:1rem;border-radius:12px;background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01))}
+
+    footer{padding:2rem 0;color:var(--muted);text-align:center}
+
+    /* small screens */
+    @media(max-width:980px){
+      .hero{grid-template-columns:1fr;}
+      .hero-right .profile-card{width:100%}
+      .skills-grid{grid-template-columns:1fr}
+    }
+
+    /* fancy floating & reveal animations */
+    @keyframes logoFloat{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(-8px) rotate(6deg)}100%{transform:translateY(0) rotate(0)}}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+    .reveal{opacity:0;transform:translateY(18px);animation:fadeInUp .9s ease forwards}
+
+    /* parallax background decorative shapes */
+    .bg-shape{position:fixed;right:-120px;top:10vh;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle at 30% 30%, rgba(124,58,237,.12), transparent 30%),radial-gradient(circle at 70% 70%, rgba(6,182,212,.08), transparent 30%);filter:blur(40px);z-index:0;pointer-events:none}
+
+    /* logo spin on hover */
+    .logo-wrap:hover{transform:scale(1.06) rotate(8deg)}
+  </style>
+</head>
+<body>
+  <!-- HTML content: header, hero, about, skills, projects, achievements, contact, footer -->
+  <div class="bg-shape" aria-hidden="true"></div>
+
+  <div class="container" style="position:relative;z-index:10">
+    <header>
+      <div class="nav">
+        <div class="brand">
+          <div class="logo-wrap" title="Logo: Rocket + initials">
+            <!-- Symbolic Tech Logo SVG: Rocket + circuit lines + initials -->
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <defs>
+                <linearGradient id="g1" x1="0" x2="1">
+                  <stop offset="0" stop-color="#06b6d4"/>
+                  <stop offset="1" stop-color="#7c3aed"/>
+                </linearGradient>
+              </defs>
+              <g fill="none" stroke="url(#g1)" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 44c-2-2.5-3-6-3-9 0-8 6.5-20 15-20 3 0 7 3 9 5 2 2 5 6 5 9 0 8.5-13 17-23 15z" opacity="0.15" fill="url(#g1)"/>
+                <path d="M32 12s-6 7-8 12c-1.3 3.2-1 6.3.2 9.7M32 12s6 7 8 12c1.3 3.2 1 6.3-.2 9.7"/>
+                <path d="M24 44s-1.5 4.5-5 8"/>
+                <path d="M40 44s1.5 4.5 5 8"/>
+                <circle cx="32" cy="32" r="2.5" fill="url(#g1)" stroke="none"/>
+              </g>
+            </svg>
+          </div>
+          <div>
+            <h4>Sumit S.</h4>
+            <div style="font-size:12px;color:var(--muted)">BCA · Full-Stack</div>
+          </div>
+        </div>
+
+        <nav style="display:flex;align-items:center">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </nav>
+      </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-left">
+        <h1 class="reveal">Hi — I'm <span style="color:var(--accent2)">Sumit</span>, a BCA 3rd Year Student</h1>
+        <p class="reveal" style="animation-delay:.15s">I build web applications, automation tools and real-time systems. I enjoy working with Python, Django/Flask, JS and building full-stack solutions.</p>
+        <div class="cta reveal" style="animation-delay:.25s">
+          <a class="btn" href="#projects">See Projects</a>
+          <a class="btn ghost" href="resume.pdf" download>Download Resume</a>
+        </div>
+
+        <div style="margin-top:1.2rem;display:flex;gap:.6rem;flex-wrap:wrap" class="reveal" style="animation-delay:.35s">
+          <div style="padding:.45rem .65rem;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:600">📍 Jaipur, Rajasthan</div>
+          <div style="padding:.45rem .65rem;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-weight:600">🐙 GitHub</div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="profile-card reveal" style="animation-delay:.3s">
+          <!-- Profile Image -->
+          <div class="avatar"><img src="C:\Users\Sumit Saini\Desktop\sumit.jpeg" alt="Sumit Saini" loading="lazy"></div>
+          <h3 style="text-align:center;margin-bottom:.25rem">Sumit S.</h3>
+          <p style="text-align:center;color:var(--muted);margin-bottom:1rem">BCA 3rd Year • Full-Stack Python Developer</p>
+          <div style="display:flex;gap:.6rem;justify-content:center">
+            <a class="btn" href="#contact">Contact</a>
+            <a class="btn ghost" href="#projects">Portfolio</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="grid">
+        <h2>About Me</h2>
+        <div class="card" style="padding:1rem;border-radius:12px;background:linear-gradient(90deg, rgba(124,58,237,0.04), rgba(6,182,212,0.03))">
+          <p style="color:var(--muted)">I'm a third-year BCA student at Poornima University focused on full-stack development, automation, and building scalable backend services. I like solving problems with clean code and collaborate on open-source projects.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="grid skills-grid">
+        <div class="skill">
+          <div class="label"><span>Python</span><span>90%</span></div>
+          <div class="bar"><div class="fill" data-w="90%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="label"><span>Web (HTML/CSS/JS)</span><span>85%</span></div>
+          <div class="bar"><div class="fill" data-w="85%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="label"><span>Django / Flask</span><span>80%</span></div>
+          <div class="bar"><div class="fill" data-w="80%"></div></div>
+        </div>
+        <div class="skill">
+          <div class="label"><span>Databases (MySQL/Mongo)</span><span>78%</span></div>
+          <div class="bar"><div class="fill" data-w="78%"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="grid projects-grid">
+        <div class="project-card">
+          <div class="project-media"><img src="https://picsum.photos/640/360?1" alt="proj1" style="width:100%;height:100%;object-fit:cover"></div>
+          <h3>Queue Management System</h3>
+          <p style="color:var(--muted)">Realtime token system with SMS/WhatsApp notifications and admin dashboard.</p>
+          <div style="display:flex;gap:.6rem;margin-top:.7rem">
+            <a class="btn" href="#">Live</a>
+            <a class="btn ghost" href="#">GitHub</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-media"><img src="https://picsum.photos/640/360?2" alt="proj2" style="width:100%;height:100%;object-fit:cover"></div>
+          <h3>Automation Suite</h3>
+          <p style="color:var(--muted)">Dashboard to send bulk emails/SMS with template engine and logs.</p>
+          <div style="display:flex;gap:.6rem;margin-top:.7rem">
+            <a class="btn" href="#">Live</a>
+            <a class="btn ghost" href="#">GitHub</a>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-media"><img src="https://picsum.photos/640/360?3" alt="proj3" style="width:100%;height:100%;object-fit:cover"></div>
+          <h3>Student Portal</h3>
+          <p style="color:var(--muted)">Role-based portal for assignments, attendance, and charts.</p>
+          <div style="display:flex;gap:.6rem;margin-top:.7rem">
+            <a class="btn" href="#">Live</a>
+            <a class="btn ghost" href="#">GitHub</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACHIEVEMENTS -->
+    <section id="achievements">
+      <h2>Achievements & Certifications</h2>
+      <div class="achievements">
+        <div class="ach-card">NPTEL – Python for Data Science (2024)</div>
+        <div class="ach-card">Coursera – Web Development (2024)</div>
+        <div class="ach-card">College Hackathon – Finalist (2023)</div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact</h2>
+      <div class="contact-card">
+        <p style="color:var(--muted)">
+          For collaboration or internships:<br>
+          <strong>2023bcasumit15689@poornima.edu.in</strong><br>
+          <strong>sumitsainiq01@gmail.com</strong><br>
+          <strong>Phone: 9649886561</strong>
+        </p>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap">
+          <a class="btn" href="mailto:2023bcasumit15689@poornima.edu.in">Email (College)</a>
+          <a class="btn ghost" href="mailto:sumitsainiq01@gmail.com">Email (Gmail)</a>
+          <a class="btn" href="tel:9649886561">Call</a>
+          <a class="btn ghost" href="https://github.com/sumitsainiq01" target="_blank" rel="noopener noreferrer">GitHub</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/sumit-saini-72b34234b/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Sumit S. · Built with ❤️
+    </footer>
+  </div>
+
+  <script>
+    // JavaScript
+    // Fill year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Animate skill bars when in viewport
+    function animateSkills(){
+      const fills = document.querySelectorAll('.fill');
+      fills.forEach(f=>{
+        const w = f.getAttribute('data-w');
+        f.style.width = w;
+      });
+    }
+    // Simple viewport check
+    const skillsSection = document.getElementById('skills');
+    const obs = new IntersectionObserver((entries)=>{
+      entries.forEach(en=>{if(en.isIntersecting){animateSkills();obs.disconnect();}})
+    },{threshold:.25});
+    if(skillsSection) obs.observe(skillsSection);
+
+    // Reveal animations stagger
+    document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.animationDelay = (i*120)+'ms'});
+  </script>
+</body>
+</html>
